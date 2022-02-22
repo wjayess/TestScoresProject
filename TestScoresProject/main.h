@@ -9,6 +9,8 @@ struct StudentData
 	double grade = 0;
 };
 
+StudentData * readFile(int);
 void ascSort(StudentData[], int);
-double averageIntArray(int[], int);
-void readFile();
+double averageStudentGrades(StudentData[], int);
+void displayData(StudentData[], int);
+void displaySortedData(StudentData[], int);

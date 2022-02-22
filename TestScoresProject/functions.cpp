@@ -3,24 +3,56 @@
 using namespace std;
 
 // quality of life. testing if something is a number or not
-bool isNumber(string stringToTest)
+bool isNumber(string string)
 {
-	for (int i = 0; i < stringToTest.length(); i++)
-		if (isdigit(stringToTest[i]) == false)
+	for (int i = 0; i < string.length(); i++)
+		if (isdigit(string[i]) == false)
 			return false;
 
 	return true;
 }
 
+// process/read data from file
+StudentData * readFile(int size)
+{
+	string readPos;
+	int count = 0;
+
+	StudentData* students = nullptr;
+	students = new StudentData[size];
+
+	ifstream inputFile;
+	inputFile.open("D:\\CPPProjects\\TestScoresProject\\TestScoresProject\\StudentData.txt");
+
+	for (int count = 0; count < size; count++)
+	{
+		inputFile >> readPos;
+		if (!isNumber(readPos))
+			students[count].name = readPos;
+		else
+			students[count].grade = atoi(readPos.c_str());
+
+		inputFile >> readPos;
+		if (!isNumber(readPos))
+			students[count].name = readPos;
+		else
+			students[count].grade = atoi(readPos.c_str());
+	}
+
+	inputFile.close();
+
+	return students;
+}
+
 // sort an array of the StudentData struct in ascending order by the grade member variable
-void ascSort(StudentData students[], int scoresArraySize)
+void ascSort(StudentData students[], int size)
 {
 	StudentData temp;
 	bool swap = true;
 	do
 	{
 		swap = false;
-		for (int count = 0; count < (scoresArraySize - 1); count++)
+		for (int count = 0; count < (size - 1); count++)
 		{
 			if (students[count].grade > students[count + 1].grade)
 			{
@@ -34,41 +66,31 @@ void ascSort(StudentData students[], int scoresArraySize)
 }
 
 // get the average of an int array
-double averageIntArray(int toAvg[], int arraySize)
+double averageStudentGrades(StudentData students[], int size)
 {
 	double sum = 0;
-	for (int i = 0; i < arraySize; i++)
+	for (int count = 0; count < size; count++)
 	{
-		sum += toAvg[i];
+		sum += students[count].grade;
 	}
 
-	return sum / arraySize;
+	return sum / size;
 }
 
-// process/read data from file
-void readFile()
+void displayData(StudentData students[], int size)
 {
-	int amountOfScores = 0;
-	string readPos;
-	ifstream inputFile;
-	inputFile.open("D:\\CPPProjects\\TestScoresProject\\TestScoresProject\\StudentData.txt");
-	while (!inputFile.eof())
+	cout << "Student Scores (unsorted):\n";
+	for (int count = 0; count < size; count++)
 	{
-		inputFile >> readPos;
-
-		// if we're reading data in the file that isn't a number, it's obviously the student's name. that means that's another student to account for.
-		if (!isNumber(readPos))
-		{
-			amountOfScores++;
-		}
+		cout << students[count].name << ": " << students[count].grade << endl;
 	}
+}
 
-	StudentData* students = nullptr;
-	students = new StudentData[amountOfScores];
-
-	for ()
-
-	inputFile.close();
-	delete[] students;
-	students = nullptr;
+void displaySortedData(StudentData students[], int size)
+{
+	cout << "Student Scores (sorted):\n";
+	for (int count = 0; count < size; count++)
+	{
+		cout << students[count].name << ": " << students[count].grade << endl;
+	}
 }

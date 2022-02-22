@@ -5,35 +5,18 @@ using namespace std;
 
 int main()
 {
-	//int amountofScores;
-	//// DAM pointer for array
-	//StudentData* currentStudents = nullptr;
+	int amountOfScores = 0;
+	cout << "Enter the amount of scores there are: ";
+	cin >> amountOfScores;
 
-	//cout << "How many scores would you like to input? ";
-	//cin >> amountofScores;
+	StudentData* students = readFile(amountOfScores);
 
-	//// dynamically allocate memory for StudentData
-	//currentStudents = new StudentData[amountofScores];
+	displayData(students, amountOfScores);
+	ascSort(students, amountOfScores);
 
-	//for (int count = 0; count < amountofScores; count++)
-	//{
-	//	cout << "Student #" << count + 1 << "'s name: ";
-	//	cin >> currentStudents[count].name;
-	//	cout << "Enter " << currentStudents[count].name << "'s test score: ";
-	//	cin >> currentStudents[count].grade;
-	//}
+	displaySortedData(students, amountOfScores);
 
-	//ascSort(currentStudents, amountofScores);
+	cout << "Average grade: " << averageStudentGrades(students, amountOfScores) << endl;
 
-	//cout << "\nStudent Data: " << endl;
-
-	//for (int count = 0; count < amountofScores; count++)
-	//{
-	//	cout << currentStudents[count].name << ": " << currentStudents[count].grade << endl;
-	//}
-
-	//delete[] currentStudents;
-	//currentStudents = nullptr;
-
-	readFile();
+	delete[] students;
 }
