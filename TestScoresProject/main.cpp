@@ -15,6 +15,19 @@ int main()
 	// dynamically allocate memory for StudentData
 	currentStudents = new StudentData[amountofScores];
 
+	for (int count = 0; count < amountofScores; count++)
+	{
+		cout << "Student #" << count + 1 << "'s name: ";
+		cin >> currentStudents[count].name;
+		cout << "Enter " << currentStudents[count].name << "'s test score: ";
+		cin >> currentStudents[count].grade;
+	}
+
+	for (int count = 0; count < amountofScores; count++)
+	{
+		cout << currentStudents[count].name << "'s test score: " << currentStudents[count].grade << endl;
+	}
+
 	delete[] currentStudents;
 	currentStudents = nullptr;
 }
