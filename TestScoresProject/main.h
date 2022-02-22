@@ -1,13 +1,14 @@
 #pragma once
 
 #include <iostream>
-#include <iomanip>
+#include <fstream>
 
 struct StudentData
 {
-	std::string name;
-	double grade;
+	std::string name = "";
+	double grade = 0;
 };
 
-void ascSortInt(int[], int);
+void ascSort(StudentData[], int);
 double averageIntArray(int[], int);
+void readFile();
