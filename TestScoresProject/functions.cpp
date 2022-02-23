@@ -2,9 +2,10 @@
 
 using namespace std;
 
-// quality of life. testing if something is a number or not
+// QoL function to check if a string is a number.
 bool isNumber(string string)
 {
+	// Loop through the string, and check if something is a digit or not.
 	for (int i = 0; i < string.length(); i++)
 		if (isdigit(string[i]) == false)
 			return false;
@@ -12,18 +13,22 @@ bool isNumber(string string)
 	return true;
 }
 
-// process/read data from file
+// Return the student data that is retrieved from the file.
 StudentData * readFile(int size)
 {
-	string readPos;
-	int count = 0;
-
+	// MAKE SURE TO DELETE LATER!!!
+	// Have to DA an array so we can change it during runtime.
 	StudentData* students = nullptr;
 	students = new StudentData[size];
 
 	ifstream inputFile;
 	inputFile.open("D:\\CPPProjects\\TestScoresProject\\TestScoresProject\\StudentData.txt");
+	string readPos;
 
+	// Had so much trouble on this for some reason. All in one iteration, check whether the read position
+	// contains "letters" or "numbers". If it contains letters, it's obviously the student's name,
+	// so store that read position within the students object's name variable, and vice versa
+	// for the student object's grade variable.
 	for (int count = 0; count < size; count++)
 	{
 		inputFile >> readPos;
@@ -41,16 +46,18 @@ StudentData * readFile(int size)
 
 	inputFile.close();
 
+	// Returning a DA array, so... again... REMEMBER TO DELETE!!!
 	return students;
 }
 
-// sort an array of the StudentData struct in ascending order by the grade member variable
+// Sort the inputted StudentData array by the grade member variable.
 void ascSort(StudentData students[], int size)
 {
 	StudentData temp;
 	bool swap = true;
 	do
 	{
+		// bubble sort ftw!!
 		swap = false;
 		for (int count = 0; count < (size - 1); count++)
 		{
@@ -65,7 +72,7 @@ void ascSort(StudentData students[], int size)
 	} while (swap);
 }
 
-// get the average of an int array
+// Get the average of the grade member variable of the passed in StudentData array.
 double averageStudentGrades(StudentData students[], int size)
 {
 	double sum = 0;
@@ -77,6 +84,7 @@ double averageStudentGrades(StudentData students[], int size)
 	return sum / size;
 }
 
+// Just display data. Simple
 void displayData(StudentData students[], int size)
 {
 	cout << "Student Scores (unsorted):\n";
@@ -86,6 +94,7 @@ void displayData(StudentData students[], int size)
 	}
 }
 
+// Literally the same as above. Since bubble sort changes the array itself, it just displays an updated version of displayData().
 void displaySortedData(StudentData students[], int size)
 {
 	cout << "Student Scores (sorted):\n";
